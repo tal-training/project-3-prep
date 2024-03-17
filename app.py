@@ -1,11 +1,12 @@
 from flask import Flask, request
 import json
+import db
 
 app = Flask(__name__)
 
 @app.route('/api/services', methods=['GET'])
 def get_services():
-    data=["service1", "service2"]
+    data=db.query("SELECT name FROM SERVICES")
     return json.dumps({
         "services":data,
         "length":len(data),
@@ -14,7 +15,8 @@ def get_services():
 
 @app.route('/api/services', methods=['POST'])
 def add_services():
-    data=json.loads(request.json)["services"]
+    data=request.json["services"]
+    db.query(f"INSERT INTO services (name) VALUES {tuple(data)}")
     return json.dumps({
         "status":"ok",
         "length":len(data)
