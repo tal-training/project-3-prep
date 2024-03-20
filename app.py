@@ -1,12 +1,16 @@
-from flask import Flask, request
+from flask import Flask, request, send_file
 import json
-import db
+import db_sqlite
 
 app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return send_file("static/index.html")
+
 @app.route('/api/services', methods=['GET'])
 def get_services():
-    tuples=db.query("SELECT name FROM SERVICES")
+    tuples=db_sqlite.query("SELECT name FROM SERVICES")
     data=[t[0] for t in tuples]
     return json.dumps({
         "services":data,
@@ -21,7 +25,7 @@ def add_services():
     for s in data:
         sql+=f"('{s}'), "
     try:
-        db.query(sql.rstrip(', '))
+        db_sqlite.query(sql.rstrip(', '))
     except Exception as e:
         print(e)
         return json.dumps({

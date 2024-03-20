@@ -10,7 +10,13 @@ def test_get_services():
     assert len(services)==length and (services is not None or length is not None)
 
 def test_add_services():
-    response=requests.post(url=TEST_URL, json=json.dumps({"services":[]})).json()
-    # assert response["length"]==0 and response["status"]=="ok"
-
-    
+    test_data = ["service1", "service2", "service3"]
+    response = requests.post(url=TEST_URL, json={"services": test_data})
+    if response.status_code == 200:
+        result = response.json()
+        assert result["status"] == "ok"
+        assert result["length"] == len(test_data)
+    else:
+        assert False, f"Failed with status code {response.status_code}"
+  
+      
