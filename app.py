@@ -26,6 +26,7 @@ def add_services():
         print(e)
         return json.dumps({
             "status":"problem",
+            "length":-1
         })
     return json.dumps({
         "status":"ok",
