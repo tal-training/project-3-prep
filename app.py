@@ -6,7 +6,8 @@ app = Flask(__name__)
 
 @app.route('/api/services', methods=['GET'])
 def get_services():
-    data=db.query("SELECT name FROM SERVICES")
+    tuples=db.query("SELECT name FROM SERVICES")
+    data=[t[0] for t in tuples]
     return json.dumps({
         "services":data,
         "length":len(data),
