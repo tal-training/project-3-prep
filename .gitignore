@@ -5,3 +5,6 @@ __pycache__/db.cpython-312.pyc
 __pycache__/db_sqlite.cpython-312.pyc
 __pycache__/db.cpython-312.pyc
 __pycache__/db.cpython-312.pyc
+__pycache__/app.cpython-310.pyc
+__pycache__/db.cpython-310.pyc
+__pycache__/test_app.cpython-310-pytest-7.1.2.pyc
